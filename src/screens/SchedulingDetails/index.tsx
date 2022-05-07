@@ -1,5 +1,5 @@
 import React from "react";
-import { View } from "react-native";
+import { Feather } from "@expo/vector-icons";
 import { Accessory } from "../../components/Accessory";
 import { BackButton } from "../../components/BackButton";
 import { ImageSlider } from "../../components/ImageSlider";
@@ -23,13 +23,26 @@ import {
   Rent,
   Period,
   Price,
-  About,
   Accessories,
   Footer,
+  RentalPeriod,
+  DateInfo,
+  DateTitle,
+  CalendarIcon,
+  DateValue,
+  RetalPrice,
+  RentalPriceLabel,
+  ReantalPriceDetails,
+  RentalPriceQouta,
+  RentalPriceTotal,
 } from "./styles";
 import { Button } from "../../components/Button";
+import { RFValue } from "react-native-responsive-fontsize";
+import { useTheme } from "styled-components";
 
-export function CarDetails() {
+export function SchedulingDetails() {
+  const theme = useTheme();
+
   return (
     <Container>
       <Header>
@@ -65,11 +78,39 @@ export function CarDetails() {
           <Accessory name="2 pessoas" icon={peopleSvg} />
         </Accessories>
 
-        <About>
-          Este é automóvel desportivo. Surgiu do lendário touro de lide
-          indultado na praça Real Maestranza de Sevilla. É um belíssimo carro
-          para quem gosta de acelerar.
-        </About>
+        <RentalPeriod>
+          <CalendarIcon>
+            <Feather
+              name="calendar"
+              size={RFValue(24)}
+              color={theme.colors.shape}
+            />
+          </CalendarIcon>
+
+          <DateInfo>
+            <DateTitle>DE</DateTitle>
+            <DateValue>18/06/2022</DateValue>
+          </DateInfo>
+
+          <Feather
+            name="chevron-right"
+            size={RFValue(10)}
+            color={theme.colors.text}
+          />
+
+          <DateInfo>
+            <DateTitle>ATE</DateTitle>
+            <DateValue>20/06/2022</DateValue>
+          </DateInfo>
+        </RentalPeriod>
+
+        <RetalPrice>
+          <RentalPriceLabel>Valor total</RentalPriceLabel>
+          <ReantalPriceDetails>
+            <RentalPriceQouta>R$ 580 x3 diárias</RentalPriceQouta>
+            <RentalPriceTotal>R$ 2.900,00</RentalPriceTotal>
+          </ReantalPriceDetails>
+        </RetalPrice>
       </Content>
 
       <Footer>
