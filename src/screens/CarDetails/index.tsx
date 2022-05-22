@@ -28,12 +28,24 @@ import {
   Footer,
 } from "./styles";
 import { Button } from "../../components/Button";
+import { useNavigation } from "@react-navigation/native";
+import { screenProp } from "../../routes/stack.routes";
 
 export function CarDetails() {
+  const navigation = useNavigation<screenProp>();
+
+  function handleBack() {
+    navigation.goBack();
+  }
+
+  function handleConfirmRental() {
+    navigation.navigate("Scheduling");
+  }
+
   return (
     <Container>
       <Header>
-        <BackButton onPress={() => {}} />
+        <BackButton onPress={() => handleBack()} />
       </Header>
 
       <CarImages>
@@ -73,7 +85,10 @@ export function CarDetails() {
       </Content>
 
       <Footer>
-        <Button title="Escolher periodo de aluguel" />
+        <Button
+          title="Escolher periodo de aluguel"
+          onPress={() => handleConfirmRental()}
+        />
       </Footer>
     </Container>
   );

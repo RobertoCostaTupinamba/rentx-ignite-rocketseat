@@ -1,5 +1,5 @@
 import React from "react";
-import { StatusBar, View } from "react-native";
+import { StatusBar } from "react-native";
 import { BackButton } from "../../components/BackButton";
 
 import ArrowSvg from "../../assets/arrow.svg";
@@ -19,9 +19,20 @@ import {
 import { useTheme } from "styled-components";
 import { Button } from "../../components/Button";
 import { Calendar } from "../../components/Calendar";
+import { screenProp } from "../../routes/stack.routes";
+import { useNavigation } from "@react-navigation/native";
 
 export function Scheduling() {
+  const navigation = useNavigation<screenProp>();
   const theme = useTheme();
+
+  function hangleGoBack() {
+    navigation.goBack();
+  }
+
+  function handleConfirmRental() {
+    navigation.navigate("SchedulingDetails");
+  }
 
   return (
     <Container>
@@ -31,7 +42,7 @@ export function Scheduling() {
           translucent
           backgroundColor="transparent"
         />
-        <BackButton onPress={() => {}} color={theme.colors.shape} />
+        <BackButton onPress={() => hangleGoBack()} color={theme.colors.shape} />
 
         <Title>
           Escolha uma{"\n"}
@@ -62,7 +73,7 @@ export function Scheduling() {
       </Content>
 
       <Footer>
-        <Button title="Confirmar" />
+        <Button title="Confirmar" onPress={() => handleConfirmRental()} />
       </Footer>
     </Container>
   );
