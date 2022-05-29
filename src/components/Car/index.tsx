@@ -16,19 +16,10 @@ import {
   Type,
   CardImage,
 } from "./styles";
-
-interface CarData {
-  brand: string;
-  name: string;
-  rent: {
-    period: string;
-    price: number;
-  };
-  thunbnail: string;
-}
+import { CarDTO } from "../../dtos/CarDTO";
 
 interface Porps extends RectButtonProps {
-  data: CarData;
+  data: CarDTO;
 }
 
 export function Car({ data, ...rest }: Porps) {
@@ -50,7 +41,7 @@ export function Car({ data, ...rest }: Porps) {
         </About>
       </Details>
 
-      <CardImage source={{ uri: data.thunbnail }} resizeMode="contain" />
+      <CardImage source={{ uri: data.thumbnail }} resizeMode="contain" />
     </Container>
   );
 }
