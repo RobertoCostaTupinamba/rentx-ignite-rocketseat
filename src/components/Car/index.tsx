@@ -17,12 +17,15 @@ import {
   CardImage,
 } from "./styles";
 import { CarDTO } from "../../dtos/CarDTO";
+import { getAccessoryIcon } from "../../utils/getAccessoryIcon";
 
 interface Porps extends RectButtonProps {
   data: CarDTO;
 }
 
 export function Car({ data, ...rest }: Porps) {
+  const MotorIcon = getAccessoryIcon(data.fuel_type);
+
   return (
     <Container {...rest}>
       <Details>
@@ -36,7 +39,7 @@ export function Car({ data, ...rest }: Porps) {
           </Rent>
 
           <Type>
-            <GasolineSvg width={20} height={20} />
+            <MotorIcon width={20} height={20} />
           </Type>
         </About>
       </Details>
