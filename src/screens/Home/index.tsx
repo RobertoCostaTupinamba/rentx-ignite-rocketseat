@@ -34,18 +34,8 @@ export function Home() {
     loadCars();
   }, []);
 
-  const carData = {
-    brand: "Audi",
-    name: "RS 5 Coupé",
-    rent: {
-      period: "AO DIA",
-      price: 120,
-    },
-    thunbnail: "https://www.pngmart.com/files/1/Audi-RS5-Red-PNG.png",
-  };
-
-  function handleCarDetails() {
-    navigation.navigate("CarDetails");
+  function handleCarDetails(car: CarDTO) {
+    navigation.navigate("CarDetails", { car });
   }
 
   return (
@@ -72,7 +62,7 @@ export function Home() {
           data={cars}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
-            <Car data={item} onPress={() => handleCarDetails()} />
+            <Car data={item} onPress={() => handleCarDetails(item)} />
           )}
         />
       )}
