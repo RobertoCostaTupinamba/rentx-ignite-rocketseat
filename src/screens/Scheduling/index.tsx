@@ -18,11 +18,19 @@ import {
 } from "./styles";
 import { useTheme } from "styled-components";
 import { Button } from "../../components/Button";
-import { Calendar } from "../../components/Calendar";
+import {
+  Calendar,
+  DayProps,
+  generateInterval,
+} from "../../components/Calendar";
 import { screenProp } from "../../routes/stack.routes";
 import { useNavigation } from "@react-navigation/native";
 
 export function Scheduling() {
+  const [lastSelectedDate, setLastSelectedDate] = React.useState<DayProps>(
+    {} as DayProps
+  );
+  const [markedDates, setMarkedDates] = React.useState({});
   const navigation = useNavigation<screenProp>();
   const theme = useTheme();
 
@@ -32,6 +40,19 @@ export function Scheduling() {
 
   function handleConfirmRental() {
     navigation.navigate("SchedulingDetails");
+  }
+
+  function handleChangeDate(date: DayProps) {
+    let start = !lastSelectedDate.timestamp ? date : lastSelectedDate;
+    let end = date;
+
+    if (start.timestamp > end.timestamp) {
+      [start, end] = [end, start];
+    }
+
+    setLastSelectedDate(end);
+    const interval = generateInterval(start, end);
+    setMarkedDates(interval);
   }
 
   return (
@@ -69,7 +90,7 @@ export function Scheduling() {
       </Header>
 
       <Content>
-        <Calendar />
+        <Calendar markedDates={markedDates} onDayPress={handleChangeDate} />
       </Content>
 
       <Footer>
