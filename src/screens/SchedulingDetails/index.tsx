@@ -52,6 +52,7 @@ interface RentalPeriod {
 }
 
 export function SchedulingDetails() {
+  const [loading, setLoading] = React.useState(false);
   const [rentalPeriod, setRentalPeriod] = React.useState<RentalPeriod>(
     {} as RentalPeriod
   );
@@ -67,6 +68,7 @@ export function SchedulingDetails() {
   }
 
   async function handleConfirmRental() {
+    setLoading(true);
     const schedulesByCar = await api.get(`/schedules_bycars/${car.id}`);
 
     const unavailableDates = [
@@ -90,7 +92,10 @@ export function SchedulingDetails() {
         unavailable_dates: unavailableDates,
       })
       .then(() => navigation.navigate("SchedulingComplete"))
-      .catch(() => Alert.alert("Erro ao reservar o carro"));
+      .catch(() => {
+        setLoading(false);
+        Alert.alert("Erro ao reservar o carro");
+      });
   }
 
   useEffect(() => {
@@ -177,6 +182,8 @@ export function SchedulingDetails() {
           title="Alugar agora"
           color={theme.colors.success}
           onPress={() => handleConfirmRental()}
+          enabled={!loading}
+          loading={loading}
         />
       </Footer>
     </Container>
