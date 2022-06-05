@@ -11,6 +11,7 @@ import { SchedulingDetails } from "../screens/SchedulingDetails";
 import { SchedulingComplete } from "../screens/SchedulingComplete";
 import { MyCars } from "../screens/MyCars/index";
 import { CarDTO } from "../dtos/CarDTO";
+import { Splash } from "../screens/Splash/index";
 
 export type RootStackParamList = {
   Home: undefined;
@@ -19,6 +20,7 @@ export type RootStackParamList = {
   SchedulingDetails: { car: CarDTO; dates: string[] };
   SchedulingComplete: undefined;
   MyCars: undefined;
+  Splash: undefined;
 };
 
 const { Navigator, Screen } = createNativeStackNavigator<RootStackParamList>();
@@ -31,7 +33,9 @@ export function StackRoutes() {
       screenOptions={{
         headerShown: false,
       }}
+      initialRouteName="Splash"
     >
+      <Screen name="Splash" component={Splash} />
       <Screen name="Home" component={Home} />
       <Screen name="CarDetails" component={CarDetails} />
       <Screen name="Scheduling" component={Scheduling} />
