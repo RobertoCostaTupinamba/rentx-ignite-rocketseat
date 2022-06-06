@@ -1,5 +1,5 @@
 import "react-native-gesture-handler";
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import {
   useFonts,
   Inter_400Regular,
@@ -14,24 +14,46 @@ import {
 
 import { ThemeProvider } from "styled-components";
 
+import * as SplashScreen from "expo-splash-screen";
+import * as Font from "expo-font";
+
 import { CarDetails } from "./src/screens/CarDetails/index";
 import AppLoading from "expo-app-loading";
 import theme from "./src/styles/theme";
 import { Scheduling } from "./src/screens/Scheduling";
 import { SchedulingDetails } from "./src/screens/SchedulingDetails";
 import { Routes } from "./src/routes";
+import { View } from "react-native";
 
 export default function App() {
-  const [fontsLoaded] = useFonts({
-    Inter_400Regular,
-    Inter_500Medium,
-    Archivo_400Regular,
-    Archivo_500Medium,
-    Archivo_600SemiBold,
-  });
+  const [appIsReady, setAppIsReady] = React.useState(false);
 
-  if (!fontsLoaded) {
-    return <AppLoading />;
+  useEffect(() => {
+    async function prepare() {
+      try {
+        await SplashScreen.preventAutoHideAsync();
+
+        await Font.loadAsync({
+          Inter_400Regular,
+          Inter_500Medium,
+          Archivo_400Regular,
+          Archivo_500Medium,
+          Archivo_600SemiBold,
+        });
+
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+      } catch (error) {
+        console.warn(error);
+      } finally {
+        setAppIsReady(true);
+        await SplashScreen.hideAsync();
+      }
+    }
+    prepare();
+  }, []);
+
+  if (!appIsReady) {
+    return null;
   }
 
   return (
