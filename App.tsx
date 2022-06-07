@@ -1,4 +1,3 @@
-import "react-native-gesture-handler";
 import React, { useCallback, useEffect } from "react";
 import {
   useFonts,
