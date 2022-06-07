@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useEffect } from "react";
-import { StatusBar, StyleSheet } from "react-native";
+import { StatusBar, StyleSheet, BackHandler } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 
 import { PanGestureHandler, RectButton } from "react-native-gesture-handler";
@@ -59,6 +59,14 @@ export function Home() {
 
   const theme = useTheme();
 
+  function handleCarDetails(car: CarDTO) {
+    navigation.navigate("CarDetails", { car });
+  }
+
+  function handleOpenMyCars() {
+    navigation.navigate("MyCars");
+  }
+
   useEffect(() => {
     async function loadCars() {
       try {
@@ -75,13 +83,11 @@ export function Home() {
     loadCars();
   }, []);
 
-  function handleCarDetails(car: CarDTO) {
-    navigation.navigate("CarDetails", { car });
-  }
-
-  function handleOpenMyCars() {
-    navigation.navigate("MyCars");
-  }
+  useEffect(() => {
+    BackHandler.addEventListener("hardwareBackPress", () => {
+      return true;
+    });
+  }, []);
 
   return (
     <Container>
@@ -93,10 +99,11 @@ export function Home() {
       <Header>
         <HeaderContent>
           <Logo width={RFValue(108)} height={RFValue(12)} />
-
-          <TotalCars>
-            Total de {cars.length} carro{cars.length > 1 ? "s" : ""}
-          </TotalCars>
+          {!loading && (
+            <TotalCars>
+              Total de {cars.length} carro{cars.length > 1 ? "s" : ""}
+            </TotalCars>
+          )}
         </HeaderContent>
       </Header>
 
