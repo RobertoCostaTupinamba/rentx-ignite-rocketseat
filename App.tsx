@@ -4,6 +4,11 @@ import {
   Inter_400Regular,
   Inter_500Medium,
 } from "@expo-google-fonts/inter";
+import { LogBox } from "react-native";
+
+LogBox.ignoreLogs([
+  "ViewPropTypes will be removed from React Native. Migrate to ViewPropTypes exported from 'deprecated-react-native-prop-types'.",
+]);
 
 import {
   Archivo_400Regular,
@@ -16,13 +21,9 @@ import { ThemeProvider } from "styled-components";
 import * as SplashScreen from "expo-splash-screen";
 import * as Font from "expo-font";
 
-import { CarDetails } from "./src/screens/CarDetails/index";
-import AppLoading from "expo-app-loading";
 import theme from "./src/styles/theme";
-import { Scheduling } from "./src/screens/Scheduling";
-import { SchedulingDetails } from "./src/screens/SchedulingDetails";
+
 import { Routes } from "./src/routes";
-import { View } from "react-native";
 
 export default function App() {
   const [appIsReady, setAppIsReady] = React.useState(false);
