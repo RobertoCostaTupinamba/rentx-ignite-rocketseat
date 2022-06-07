@@ -25,7 +25,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useTheme } from "styled-components";
 import { Car } from "../../components/Car";
 import { CarDTO } from "../../dtos/CarDTO";
-import { Load } from "../../components/Load";
+import { LoadAnimation } from "../../components/LoadAnimation";
 
 interface CarProps {
   id: string;
@@ -80,7 +80,7 @@ export function MyCars() {
         <SubTitle>Conforto, Segurança e praticidade</SubTitle>
       </Header>
       {loading ? (
-        <Load />
+        <LoadAnimation />
       ) : (
         <Content>
           <Appointments>

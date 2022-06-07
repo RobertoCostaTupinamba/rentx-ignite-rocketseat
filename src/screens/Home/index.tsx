@@ -26,6 +26,7 @@ import { api } from "../../services/api";
 import { CarDTO } from "../../dtos/CarDTO";
 import { Load } from "../../components/Load";
 import { useTheme } from "styled-components";
+import { LoadAnimation } from "../../components/LoadAnimation";
 
 export function Home() {
   const navigation = useNavigation<screenProp>();
@@ -108,7 +109,7 @@ export function Home() {
       </Header>
 
       {loading ? (
-        <Load />
+        <LoadAnimation />
       ) : (
         <CarList
           data={cars}
