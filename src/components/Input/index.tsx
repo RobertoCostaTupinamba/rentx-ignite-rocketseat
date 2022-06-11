@@ -10,14 +10,36 @@ interface Props extends TextInputProps {
 }
 
 export function Input({ iconName, ...rest }: Props) {
+  const [isFocused, setIsFocused] = React.useState(false);
+  const [isFilled, setIsFilled] = React.useState(false);
+
+  function handleInputFocus() {
+    setIsFocused(true);
+  }
+
+  function handleInputBlur() {
+    setIsFocused(false);
+    setIsFilled(!!rest.value);
+  }
+
   const theme = useTheme();
   return (
-    <Container>
+    <Container isFocused={isFocused}>
       <IconContainer>
-        <Feather name={iconName} size={24} color={theme.colors.text_detail} />
+        <Feather
+          name={iconName}
+          size={24}
+          color={
+            isFocused || isFilled ? theme.colors.main : theme.colors.text_detail
+          }
+        />
       </IconContainer>
 
-      <InputText {...rest} />
+      <InputText
+        onFocus={handleInputFocus}
+        onBlur={handleInputBlur}
+        {...rest}
+      />
     </Container>
   );
 }

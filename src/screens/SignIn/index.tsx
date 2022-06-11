@@ -13,6 +13,9 @@ import { PasswordInput } from "../../components/PasswordInput";
 import { Container, Header, SubTitle, Title, Form, Footer } from "./styles";
 
 export function SignIn() {
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+
   const theme = useTheme();
 
   return (
@@ -41,13 +44,16 @@ export function SignIn() {
               keyboardType="email-address"
               autoCorrect={false}
               autoCapitalize="none"
-              returnKeyType="next"
+              onChangeText={(text) => setEmail(text)}
+              value={email}
             />
             <PasswordInput
               iconName="lock"
               placeholder="Senha"
               autoCorrect={false}
               autoCapitalize="none"
+              onChangeText={(text) => setPassword(text)}
+              value={password}
             />
           </Form>
 
