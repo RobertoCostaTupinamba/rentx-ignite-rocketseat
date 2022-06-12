@@ -6,8 +6,8 @@ interface ButtonTextProps {
   light?: boolean;
 }
 
-interface ButtonProps extends RectButtonProps {
-  color?: string;
+interface ButtonProps {
+  color: string;
 }
 
 export const Container = styled(RectButton)<ButtonProps>`

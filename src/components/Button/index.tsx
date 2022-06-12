@@ -8,7 +8,6 @@ import { useTheme } from "styled-components";
 interface Props extends RectButtonProps {
   title: string;
   color?: string;
-  enabled?: boolean;
   loading?: boolean;
   light?: boolean;
 }
@@ -24,10 +23,10 @@ export function Button({
   const theme = useTheme();
   return (
     <Container
-      {...rest}
       color={color ? color : theme.colors.main}
       enabled={enabled}
       style={{ opacity: enabled === false || loading === true ? 0.5 : 1 }}
+      {...rest}
     >
       {loading ? (
         <ActivityIndicator color={theme.colors.shape} />
