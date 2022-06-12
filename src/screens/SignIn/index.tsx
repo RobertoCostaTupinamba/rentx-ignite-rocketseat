@@ -4,6 +4,7 @@ import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
+  TextInput,
 } from "react-native";
 import { useTheme } from "styled-components";
 import { Button } from "../../components/Button";
@@ -17,6 +18,8 @@ export function SignIn() {
   const [password, setPassword] = React.useState("");
 
   const theme = useTheme();
+
+  const passwordInputRef = React.useRef<TextInput>(null);
 
   return (
     <KeyboardAvoidingView behavior="position" enabled>
@@ -44,10 +47,15 @@ export function SignIn() {
               keyboardType="email-address"
               autoCorrect={false}
               autoCapitalize="none"
-              onChangeText={(text) => setEmail(text)}
+              returnKeyType="next"
               value={email}
+              onChangeText={(text) => setEmail(text)}
+              onSubmitEditing={() => {
+                passwordInputRef.current?.focus();
+              }}
             />
             <PasswordInput
+              refInput={passwordInputRef}
               iconName="lock"
               placeholder="Senha"
               autoCorrect={false}

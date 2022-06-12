@@ -1,5 +1,5 @@
 import React from "react";
-import { TextInputProps } from "react-native";
+import { TextInput, TextInputProps } from "react-native";
 import { useTheme } from "styled-components";
 
 import { Container, IconContainer, InputText } from "./styles";
@@ -8,9 +8,10 @@ import { BorderlessButton } from "react-native-gesture-handler";
 
 interface Props extends TextInputProps {
   iconName: React.ComponentProps<typeof Feather>["name"];
+  refInput: React.RefObject<TextInput>;
 }
 
-export function PasswordInput({ iconName, ...rest }: Props) {
+export function PasswordInput({ iconName, refInput, ...rest }: Props) {
   const [isPasswordVisible, setIsPasswordVisible] = React.useState(true);
   const [isFocused, setIsFocused] = React.useState(false);
   const [isFilled, setIsFilled] = React.useState(false);
@@ -42,6 +43,7 @@ export function PasswordInput({ iconName, ...rest }: Props) {
       </IconContainer>
 
       <InputText
+        ref={refInput}
         onFocus={handleInputFocus}
         onBlur={handleInputBlur}
         isFocused={isFocused}
