@@ -1,7 +1,7 @@
 import React from "react";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { BackButton } from "../../../components/BackButton";
-import { screenProp } from "../../../routes/stack.routes";
+import { DTOUser, screenProp } from "../../../routes/stack.routes";
 
 import {
   Container,
@@ -15,19 +15,46 @@ import {
 import { Bullet } from "../../../components/Bullet";
 
 import { Button } from "../../../components/Button";
-import { Keyboard, KeyboardAvoidingView, TextInput } from "react-native";
+import { Alert, Keyboard, KeyboardAvoidingView } from "react-native";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { PasswordInput } from "../../../components/PasswordInput";
 import { useTheme } from "styled-components";
+import * as Yup from "yup";
+
+interface Params {
+  user: DTOUser;
+}
 
 export function SignUpSecondStep() {
+  const [password, setPassword] = React.useState("");
+  const [confirmPassword, setConfirmPassword] = React.useState("");
   const navigation = useNavigation<screenProp>();
-
+  const route = useRoute();
   const theme = useTheme();
 
-  const emailInputRef = React.useRef<TextInput>(null);
+  const { user } = route.params as Params;
 
-  const cnhInputRef = React.useRef<TextInput>(null);
+  async function handleRegister() {
+    try {
+      const schema = Yup.object().shape({
+        password: Yup.string().required("Senha obrigatória"),
+        confirmPassword: Yup.string()
+          .oneOf([Yup.ref("password"), null], "Senhas não conferem")
+          .required("Confirmação de senha obrigatória"),
+      });
+
+      await schema.validate(
+        { password, confirmPassword },
+        { abortEarly: false }
+      );
+    } catch (error) {
+      if (error instanceof Yup.ValidationError) {
+        const errors = error.inner.map((err) => err.message);
+
+        return Alert.alert("Erro", errors.join("\n"));
+      }
+    }
+  }
 
   function handleBack() {
     navigation.goBack();
@@ -56,11 +83,25 @@ export function SignUpSecondStep() {
 
           <Form>
             <FormTitle>2. Senha</FormTitle>
-            <PasswordInput iconName="lock" placeholder="Senha" />
-            <PasswordInput iconName="lock" placeholder="Repetir Senha" />
+            <PasswordInput
+              iconName="lock"
+              placeholder="Senha"
+              value={password}
+              onChangeText={(text) => setPassword(text)}
+            />
+            <PasswordInput
+              iconName="lock"
+              placeholder="Repetir Senha"
+              value={confirmPassword}
+              onChangeText={(text) => setConfirmPassword(text)}
+            />
           </Form>
 
-          <Button title="Cadastrar" color={theme.colors.success} />
+          <Button
+            title="Cadastrar"
+            onPress={handleRegister}
+            color={theme.colors.success}
+          />
         </Container>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>

@@ -16,6 +16,12 @@ import { SignIn } from "../screens/SignIn/index";
 import { SignUpFirstStep } from "../screens/SignUp/SignUpFirstStep";
 import { SignUpSecondStep } from "../screens/SignUp/SignUpSecondStep";
 
+export interface DTOUser {
+  name: string;
+  email: string;
+  driverLicense: string;
+}
+
 export type RootStackParamList = {
   Home: undefined;
   CarDetails: { car: CarDTO };
@@ -26,7 +32,7 @@ export type RootStackParamList = {
   Splash: undefined;
   SignIn: undefined;
   SignUpFirstStep: undefined;
-  SignUpSecondStep: undefined;
+  SignUpSecondStep: { user: DTOUser };
 };
 
 const { Navigator, Screen } = createNativeStackNavigator<RootStackParamList>();
