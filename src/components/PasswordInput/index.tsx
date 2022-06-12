@@ -8,7 +8,7 @@ import { BorderlessButton } from "react-native-gesture-handler";
 
 interface Props extends TextInputProps {
   iconName: React.ComponentProps<typeof Feather>["name"];
-  refInput: React.RefObject<TextInput>;
+  refInput?: React.RefObject<TextInput>;
 }
 
 export function PasswordInput({ iconName, refInput, ...rest }: Props) {

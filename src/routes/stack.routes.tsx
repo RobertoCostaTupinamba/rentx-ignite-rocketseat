@@ -14,6 +14,7 @@ import { CarDTO } from "../dtos/CarDTO";
 import { Splash } from "../screens/Splash/index";
 import { SignIn } from "../screens/SignIn/index";
 import { SignUpFirstStep } from "../screens/SignUp/SignUpFirstStep";
+import { SignUpSecondStep } from "../screens/SignUp/SignUpSecondStep";
 
 export type RootStackParamList = {
   Home: undefined;
@@ -25,6 +26,7 @@ export type RootStackParamList = {
   Splash: undefined;
   SignIn: undefined;
   SignUpFirstStep: undefined;
+  SignUpSecondStep: undefined;
 };
 
 const { Navigator, Screen } = createNativeStackNavigator<RootStackParamList>();
@@ -41,6 +43,7 @@ export function StackRoutes() {
     >
       <Screen name="SignIn" component={SignIn} />
       <Screen name="SignUpFirstStep" component={SignUpFirstStep} />
+      <Screen name="SignUpSecondStep" component={SignUpSecondStep} />
 
       <Screen
         name="Home"

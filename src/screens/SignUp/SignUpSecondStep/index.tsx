@@ -13,13 +13,17 @@ import {
   FormTitle,
 } from "./styles";
 import { Bullet } from "../../../components/Bullet";
-import { Input } from "../../../components/Input";
+
 import { Button } from "../../../components/Button";
 import { Keyboard, KeyboardAvoidingView, TextInput } from "react-native";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import { PasswordInput } from "../../../components/PasswordInput";
+import { useTheme } from "styled-components";
 
-export function SignUpFirstStep() {
+export function SignUpSecondStep() {
   const navigation = useNavigation<screenProp>();
+
+  const theme = useTheme();
 
   const emailInputRef = React.useRef<TextInput>(null);
 
@@ -29,10 +33,6 @@ export function SignUpFirstStep() {
     navigation.goBack();
   }
 
-  function handleNextStep() {
-    navigation.navigate("SignUpSecondStep");
-  }
-
   return (
     <KeyboardAvoidingView behavior="position" enabled>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -40,8 +40,8 @@ export function SignUpFirstStep() {
           <Header>
             <BackButton onPress={handleBack} />
             <Steps>
-              <Bullet active />
               <Bullet />
+              <Bullet active />
             </Steps>
           </Header>
 
@@ -55,38 +55,12 @@ export function SignUpFirstStep() {
           </SubTitle>
 
           <Form>
-            <FormTitle>1. Dados</FormTitle>
-            <Input
-              iconName="user"
-              placeholder="Nome"
-              autoCorrect
-              autoCapitalize="words"
-              returnKeyType="next"
-              onSubmitEditing={() => {
-                emailInputRef.current?.focus();
-              }}
-            />
-            <Input
-              refInput={emailInputRef}
-              iconName="mail"
-              placeholder="E-mail"
-              keyboardType="email-address"
-              autoCorrect={false}
-              autoCapitalize="none"
-              returnKeyType="next"
-              onSubmitEditing={() => {
-                cnhInputRef.current?.focus();
-              }}
-            />
-            <Input
-              refInput={cnhInputRef}
-              iconName="credit-card"
-              placeholder="CNH"
-              keyboardType="numeric"
-            />
+            <FormTitle>2. Senha</FormTitle>
+            <PasswordInput iconName="lock" placeholder="Senha" />
+            <PasswordInput iconName="lock" placeholder="Repetir Senha" />
           </Form>
 
-          <Button title="Próximo" onPress={handleNextStep} />
+          <Button title="Cadastrar" color={theme.colors.success} />
         </Container>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
