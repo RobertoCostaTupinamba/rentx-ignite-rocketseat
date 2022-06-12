@@ -1,14 +1,9 @@
 import React, { useRef, useState } from "react";
-import { View, ViewToken } from "react-native";
+import { ViewToken } from "react-native";
 import { FlatList } from "react-native";
+import { Bullet } from "../Bullet";
 
-import {
-  Container,
-  ImageIndexes,
-  ImageIndex,
-  CarImageWrapper,
-  CarImage,
-} from "./styles";
+import { Container, ImageIndexes, CarImageWrapper, CarImage } from "./styles";
 
 interface Props {
   imagesUrl: string[];
@@ -32,7 +27,7 @@ export function ImageSlider({ imagesUrl }: Props) {
     <Container>
       <ImageIndexes>
         {imagesUrl.map((_, index) => {
-          return <ImageIndex key={index} active={index === imageIndex} />;
+          return <Bullet key={index} active={index === imageIndex} />;
         })}
       </ImageIndexes>
 

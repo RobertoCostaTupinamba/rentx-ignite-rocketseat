@@ -15,10 +15,14 @@ import { Input } from "../../components/Input";
 import { PasswordInput } from "../../components/PasswordInput";
 
 import { Container, Header, SubTitle, Title, Form, Footer } from "./styles";
+import { useNavigation } from "@react-navigation/native";
+import { screenProp } from "../../routes/stack.routes";
 
 export function SignIn() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+
+  const navigation = useNavigation<screenProp>();
 
   const theme = useTheme();
 
@@ -45,6 +49,10 @@ export function SignIn() {
         Alert.alert("Erro", "Erro no login");
       }
     }
+  }
+
+  function handleNewAccount() {
+    navigation.navigate("SignUpFirstStep");
   }
 
   return (
@@ -103,9 +111,9 @@ export function SignIn() {
               title="Criar conta gratuita"
               color={theme.colors.background_secondary}
               light
-              enabled={false}
+              enabled={true}
               loading={false}
-              onPress={() => {}}
+              onPress={handleNewAccount}
             />
           </Footer>
         </Container>
