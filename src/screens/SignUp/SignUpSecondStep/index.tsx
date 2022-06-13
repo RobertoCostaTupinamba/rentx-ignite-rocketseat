@@ -47,6 +47,12 @@ export function SignUpSecondStep() {
         { password, confirmPassword },
         { abortEarly: false }
       );
+
+      navigation.navigate("Confirmation", {
+        title: "Cadastro realizado!",
+        message: `Agora você já pode fazer login\nna plataforma.`,
+        nextScreenRoute: "SignIn",
+      });
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         const errors = error.inner.map((err) => err.message);
