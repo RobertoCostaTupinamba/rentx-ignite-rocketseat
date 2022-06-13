@@ -16,7 +16,7 @@ import { PasswordInput } from "../../components/PasswordInput";
 
 import { Container, Header, SubTitle, Title, Form, Footer } from "./styles";
 import { useNavigation } from "@react-navigation/native";
-import { screenProp } from "../../routes/stack.routes";
+import { screenProp } from "../../routes/app.stack.routes";
 import { useAuth } from "../../hooks/auth";
 
 export function SignIn() {

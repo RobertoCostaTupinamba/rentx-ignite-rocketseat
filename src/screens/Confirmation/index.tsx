@@ -7,7 +7,7 @@ import DoneSvg from "../../assets/done.svg";
 import { Container, Content, Title, Message, Footer } from "./styles";
 import { ConfirmButton } from "../../components/ConfirmButton";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { screenProp } from "../../routes/stack.routes";
+import { screenProp } from "../../routes/app.stack.routes";
 
 interface Params {
   title: string;

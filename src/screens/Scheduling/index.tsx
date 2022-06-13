@@ -23,7 +23,7 @@ import {
   DayProps,
   generateInterval,
 } from "../../components/Calendar";
-import { screenProp } from "../../routes/stack.routes";
+import { screenProp } from "../../routes/app.stack.routes";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { format } from "date-fns";
 import { getPlataformDate } from "../../utils/getPlataformDate";

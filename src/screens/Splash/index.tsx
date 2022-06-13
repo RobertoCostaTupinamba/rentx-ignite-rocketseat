@@ -14,7 +14,7 @@ import Animated, {
 
 import { Container } from "./styles";
 import { useNavigation } from "@react-navigation/native";
-import { screenProp } from "../../routes/stack.routes";
+import { screenProp } from "../../routes/app.stack.routes";
 
 export function Splash() {
   const splashAnimation = useSharedValue(0);
@@ -54,7 +54,7 @@ export function Splash() {
   });
 
   function startApp() {
-    navigation.navigate("Home");
+    navigation.navigate("SignIn");
   }
 
   useEffect(() => {

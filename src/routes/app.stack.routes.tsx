@@ -11,16 +11,7 @@ import { SchedulingDetails } from "../screens/SchedulingDetails";
 import { Confirmation } from "../screens/Confirmation";
 import { MyCars } from "../screens/MyCars/index";
 import { CarDTO } from "../dtos/CarDTO";
-import { Splash } from "../screens/Splash/index";
-import { SignIn } from "../screens/SignIn/index";
-import { SignUpFirstStep } from "../screens/SignUp/SignUpFirstStep";
-import { SignUpSecondStep } from "../screens/SignUp/SignUpSecondStep";
-
-export interface DTOUser {
-  name: string;
-  email: string;
-  driverLicense: string;
-}
+import { Splash } from "../screens/Splash";
 
 type ScreenDTO = {
   nextScreenRoute: "SignIn" | "Home";
@@ -35,18 +26,15 @@ export type RootStackParamList = {
   SchedulingDetails: { car: CarDTO; dates: string[] };
   SchedulingComplete: undefined;
   MyCars: undefined;
-  Splash: undefined;
-  SignIn: undefined;
+  // Splash: undefined;
   Confirmation: ScreenDTO;
-  SignUpFirstStep: undefined;
-  SignUpSecondStep: { user: DTOUser };
 };
 
 const { Navigator, Screen } = createNativeStackNavigator<RootStackParamList>();
 
 export type screenProp = NativeStackNavigationProp<RootStackParamList>;
 
-export function StackRoutes() {
+export function AppStackRoutes() {
   return (
     <Navigator
       screenOptions={{
@@ -54,17 +42,7 @@ export function StackRoutes() {
       }}
       initialRouteName="Home"
     >
-      <Screen name="SignIn" component={SignIn} />
-      <Screen name="SignUpFirstStep" component={SignUpFirstStep} />
-      <Screen name="SignUpSecondStep" component={SignUpSecondStep} />
-
-      <Screen
-        name="Home"
-        component={Home}
-        options={{
-          gestureEnabled: false,
-        }}
-      />
+      <Screen name="Home" component={Home} />
       <Screen name="CarDetails" component={CarDetails} />
       <Screen name="Scheduling" component={Scheduling} />
       <Screen name="MyCars" component={MyCars} />

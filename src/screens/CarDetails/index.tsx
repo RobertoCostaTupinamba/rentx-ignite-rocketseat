@@ -30,7 +30,7 @@ import {
 } from "./styles";
 import { Button } from "../../components/Button";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { screenProp } from "../../routes/stack.routes";
+import { screenProp } from "../../routes/app.stack.routes";
 import { CarDTO } from "../../dtos/CarDTO";
 import { getAccessoryIcon } from "../../utils/getAccessoryIcon";
 import { getStatusBarHeight } from "react-native-iphone-x-helper";

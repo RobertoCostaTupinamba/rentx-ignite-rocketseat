@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { BackButton } from "../../../components/BackButton";
-import { screenProp } from "../../../routes/stack.routes";
+import { screenProp } from "../../../routes/app.stack.routes";
 
 import {
   Container,

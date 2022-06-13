@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { BackButton } from "../../../components/BackButton";
-import { DTOUser, screenProp } from "../../../routes/stack.routes";
+import { DTOUser, screenProp } from "../../../routes/app.stack.routes";
 
 import {
   Container,
