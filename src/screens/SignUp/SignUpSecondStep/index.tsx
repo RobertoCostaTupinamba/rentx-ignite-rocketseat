@@ -20,6 +20,7 @@ import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { PasswordInput } from "../../../components/PasswordInput";
 import { useTheme } from "styled-components";
 import * as Yup from "yup";
+import { api } from "../../../services/api";
 
 interface Params {
   user: DTOUser;
@@ -50,11 +51,23 @@ export function SignUpSecondStep() {
         { abortEarly: false }
       );
 
-      navigation.navigate("Confirmation", {
-        title: "Cadastro realizado!",
-        message: `Agora você já pode fazer login\nna plataforma.`,
-        nextScreenRoute: "SignIn",
-      });
+      await api
+        .post("/users", {
+          name: user.name,
+          email: user.email,
+          driver_license: user.driverLicense,
+          password,
+        })
+        .then(() => {
+          navigation.navigate("Confirmation", {
+            title: "Cadastro realizado!",
+            message: `Agora você já pode fazer login\nna plataforma.`,
+            nextScreenRoute: "SignIn",
+          });
+        })
+        .catch(() => {
+          Alert.alert("Erro ao cadastrar usuário");
+        });
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         const errors = error.inner.map((err) => err.message);
