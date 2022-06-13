@@ -17,10 +17,12 @@ import { PasswordInput } from "../../components/PasswordInput";
 import { Container, Header, SubTitle, Title, Form, Footer } from "./styles";
 import { useNavigation } from "@react-navigation/native";
 import { screenProp } from "../../routes/stack.routes";
+import { useAuth } from "../../hooks/auth";
 
 export function SignIn() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const { signIn } = useAuth();
 
   const navigation = useNavigation<screenProp>();
 
@@ -39,7 +41,9 @@ export function SignIn() {
 
       await schema.validate({ email, password }, { abortEarly: false });
 
-      Alert.alert("Sucesso", "Login realizado com sucesso");
+      await signIn({ email, password }).then(() => {
+        Alert.alert("Sucesso", "Login realizado com sucesso");
+      });
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         const errors = error.inner.map((err) => err.message);
