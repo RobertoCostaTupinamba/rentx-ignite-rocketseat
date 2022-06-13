@@ -14,12 +14,12 @@ import Animated, {
 
 import { Container } from "./styles";
 import { useNavigation } from "@react-navigation/native";
-import { screenProp } from "../../routes/app.stack.routes";
+import { screenAuthProp } from "../../routes/auth.routes";
 
 export function Splash() {
   const splashAnimation = useSharedValue(0);
 
-  const navigation = useNavigation<screenProp>();
+  const navigation = useNavigation<screenAuthProp>();
 
   const brandStyle = useAnimatedStyle(() => {
     return {

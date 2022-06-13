@@ -33,7 +33,7 @@ export type RootAuthParamList = {
 
 const { Navigator, Screen } = createNativeStackNavigator<RootAuthParamList>();
 
-export type screenProp = NativeStackNavigationProp<RootAuthParamList>;
+export type screenAuthProp = NativeStackNavigationProp<RootAuthParamList>;
 
 export function AuthRoutes() {
   return (
