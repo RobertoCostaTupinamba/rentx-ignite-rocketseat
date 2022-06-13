@@ -15,7 +15,7 @@ import {
 import { Bullet } from "../../../components/Bullet";
 
 import { Button } from "../../../components/Button";
-import { Alert, Keyboard, KeyboardAvoidingView } from "react-native";
+import { Alert, Keyboard, KeyboardAvoidingView, TextInput } from "react-native";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { PasswordInput } from "../../../components/PasswordInput";
 import { useTheme } from "styled-components";
@@ -31,6 +31,8 @@ export function SignUpSecondStep() {
   const navigation = useNavigation<screenProp>();
   const route = useRoute();
   const theme = useTheme();
+
+  const inputConfirmPasswordRef = React.useRef<TextInput>(null);
 
   const { user } = route.params as Params;
 
@@ -92,10 +94,15 @@ export function SignUpSecondStep() {
             <PasswordInput
               iconName="lock"
               placeholder="Senha"
+              returnKeyType="next"
               value={password}
               onChangeText={(text) => setPassword(text)}
+              onSubmitEditing={() => {
+                inputConfirmPasswordRef.current?.focus();
+              }}
             />
             <PasswordInput
+              refInput={inputConfirmPasswordRef}
               iconName="lock"
               placeholder="Repetir Senha"
               value={confirmPassword}
